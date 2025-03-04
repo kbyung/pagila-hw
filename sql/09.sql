@@ -7,4 +7,5 @@ FROM staff
 INNER JOIN payment ON staff.staff_id = payment.staff_id
 WHERE payment.payment_date >= '2020-01-01 00:00:00' AND
 payment.payment_date < '2020-01-31 23:59:59'
-GROUP BY staff.staff_id, staff.first_name, staff.last_name;
+GROUP BY staff.staff_id, staff.first_name, staff.last_name
+ORDER BY staff.first_name;
