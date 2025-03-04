@@ -2,13 +2,18 @@
  * Find the actor_id of every actor whose first name starts with the indicated string.
  * Order the results from low to hi.
  */
-CREATE OR REPLACE FUNCTION get_actor_ids(text) RETURNS TABLE(actor_id INTEGER) AS
+CREATE OR REPLACE FUNCTION get_actor_ids(prefix TEXT) RETURNS TABLE(actor_id INTEGER) AS
 $$
--- FIXME: implementation goes here
+BEGIN
+    RETURN QUERY
+    SELECT actor.actor_id FROM actor
+    WHERE actor.first_name ILIKE  prefix || '%'
+    ORDER BY actor.actor_id ASC;
+END;
 $$
-LANGUAGE SQL
-IMMUTABLE
-RETURNS NULL ON NULL INPUT;
+LANGUAGE plpgsql;
+--IMMUTABLE
+--RETURNS NULL ON NULL INPUT;
 
 SELECT * FROM get_actor_ids('a');
 SELECT * FROM get_actor_ids('b');
