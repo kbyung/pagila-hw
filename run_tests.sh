@@ -15,6 +15,11 @@ for problem in sql/*; do
         echo pass
     else
         echo fail
+        echo "Differences found: $DIFF"
+        echo "Expected Output:"
+        cat "$expected"
+        echo "Actual Output:"
+        cat "$result"
         failed=true
     fi
 done
